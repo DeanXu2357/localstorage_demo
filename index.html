@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>localStorage Demo</title>
+    <link rel="stylesheet" href="">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+        .row-style {
+            margin-top: 5px
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+    <br>
+        <div class="row row-style form-inline">
+            <div class="form-group col-md-offset-1 col-md-3">
+                <label>Set Key :
+                    <input class="form-control col-md-offset-3" type="text" name="setKey" value="">
+                </label>
+            </div>
+        </div>
+        <div class="row row-style form-inline">
+            <div class="form-group col-md-offset-1 col-md-3">
+                <label>Set Value :
+                    <input class="form-control col-md-offset-3" type="text" name="setValue" value="">
+                </label>
+            </div>
+            <button class="btn btn-warning btn-lg col-md-offset-3 col-md-2" id="btn_save">Save to LocalStorage</button>
+        </div>
+
+        <div class="row row-style">
+            <form class="form-inline">
+                <div class="form-group col-md-offset-1 col-md-3">
+                    <label>The Key U want to get :
+                        <input class="form-control" type="text" name="getKey" value="">
+                    </label>
+                </div>
+
+                <button class="btn btn-info btn-lg col-md-offset-3 col-md-2" type="button" id="btn_get"> Get </button>
+            </form>
+        </div>
+
+        <div class="row row-style">
+            <form class="form-inline">
+                <div class="form-group col-md-offset-1 col-md-3">
+                    <label>The Key U want to Delete :
+                        <input class="form-control" type="text" name="deleteKey" value="">
+                    </label>
+                </div>
+
+                <button class="btn btn-danger btn-lg col-md-offset-3 col-md-2" type="button" id="btn_delete"> Delete </button>
+            </form>
+        </div>
+
+        <div class="row row-style col-md-offset-1 col-md-5">
+            <input class="form-control" type="text" name="getValue" disabled="" style="margin-left: -10px ">
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#btn_save').on('click', function() {
+                var key = $('input[name=setKey]').val();
+                var value = $('input[name=setValue]').val();
+                if (key !== ''&&value !== '')
+                    localStorage.setItem(key, value);
+                else
+                    alert('Data Missing');
+            });
+
+            $('#btn_get').on('click', function() {
+                var getkey = $('input[name=getKey]').val();
+                var getValue = localStorage.getItem(getkey);
+                if (getValue == null) {
+                    alert('seems the key has no value');
+                }
+                $('input[name=getValue]').val(getValue);
+            });
+
+            $('#btn_delete').on('click', function() {
+                var deletekey = $('input[name=deleteKey]').val();
+                localStorage.removeItem(deletekey);
+                alert('"'+deletekey+'" has already deleted');
+            })
+        });
+
+    </script>
+</body>
+</html>
